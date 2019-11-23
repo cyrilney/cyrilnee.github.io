@@ -47,13 +47,13 @@
   };
 </script>
 
-  <meta name="description" content="红黑树我们都知道平衡二叉查找树（排序树）在极端情况下，查询效率为O(N)。因此需要一个自平衡的数据结构保证查找效率。本片主角红黑树树就这样诞生了。  红黑树（英语：Red–black tree）是一种自平衡二叉查找树，是在计算机科学中用到的一种数据结构，典型的用途是实现关联数组。它在1972年由鲁道夫·贝尔发明，被称为”对称二叉B树”，它现代的名字源于Leo J. Guibas和Robert Se">
+  <meta name="description" content="红黑树 我们都知道平衡二叉查找树（排序树）在极端情况下，查询效率为O(N)。因此需要一个自平衡的数据结构保证查找效率。本片主角红黑树树就这样诞生了。  红黑树（英语：Red–black tree）是一种自平衡二叉查找树，是在计算机科学中用到的一种数据结构，典型的用途是实现关联数组。它在1972年由鲁道夫·贝尔发明，被称为&amp;quot;对称二叉B树&amp;quot;，它现代的名字源于Leo J. Guib">
 <meta name="keywords" content="java, 数据结构">
 <meta property="og:type" content="article">
 <meta property="og:title" content="红黑树">
 <meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;24&#x2F;%E7%BA%A2%E9%BB%91%E6%A0%91&#x2F;index.html">
 <meta property="og:site_name" content="子我">
-<meta property="og:description" content="红黑树我们都知道平衡二叉查找树（排序树）在极端情况下，查询效率为O(N)。因此需要一个自平衡的数据结构保证查找效率。本片主角红黑树树就这样诞生了。  红黑树（英语：Red–black tree）是一种自平衡二叉查找树，是在计算机科学中用到的一种数据结构，典型的用途是实现关联数组。它在1972年由鲁道夫·贝尔发明，被称为”对称二叉B树”，它现代的名字源于Leo J. Guibas和Robert Se">
+<meta property="og:description" content="红黑树 我们都知道平衡二叉查找树（排序树）在极端情况下，查询效率为O(N)。因此需要一个自平衡的数据结构保证查找效率。本片主角红黑树树就这样诞生了。  红黑树（英语：Red–black tree）是一种自平衡二叉查找树，是在计算机科学中用到的一种数据结构，典型的用途是实现关联数组。它在1972年由鲁道夫·贝尔发明，被称为&amp;quot;对称二叉B树&amp;quot;，它现代的名字源于Leo J. Guib">
 <meta property="og:locale" content="zh-cn">
 <meta property="og:image" content="https:&#x2F;&#x2F;blog-bucket-1300756499.cos.ap-chengdu.myqcloud.com&#x2F;%E7%BA%A2%E9%BB%91%E6%A0%91.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;blog-bucket-1300756499.cos.ap-chengdu.myqcloud.com&#x2F;rotationLeft.gif">
@@ -222,12 +222,14 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="红黑树"><a href="#红黑树" class="headerlink" title="红黑树"></a>红黑树</h2><p>我们都知道平衡二叉查找树（排序树）在极端情况下，查询效率为O(N)。因此需要一个自平衡的数据结构保证查找效率。本片主角红黑树树就这样诞生了。</p>
+        <h2 id="红黑树"><a class="markdownIt-Anchor" href="#红黑树"></a> 红黑树</h2>
+<p>我们都知道平衡二叉查找树（排序树）在极端情况下，查询效率为O(N)。因此需要一个自平衡的数据结构保证查找效率。本片主角红黑树树就这样诞生了。</p>
 <blockquote>
-<p>红黑树（英语：Red–black tree）是一种自平衡二叉查找树，是在计算机科学中用到的一种数据结构，典型的用途是实现关联数组。它在1972年由鲁道夫·贝尔发明，被称为”对称二叉B树”，它现代的名字源于Leo J. Guibas和Robert Sedgewick于1978年写的一篇论文。红黑树的结构复杂，但它的操作有着良好的最坏情况运行时间，并且在实践中高效：它可以在log n时间内完成查找，插入和删除，这里的n是树中元素的数目.</p>
+<p>红黑树（英语：Red–black tree）是一种自平衡二叉查找树，是在计算机科学中用到的一种数据结构，典型的用途是实现关联数组。它在1972年由鲁道夫·贝尔发明，被称为&quot;对称二叉B树&quot;，它现代的名字源于Leo J. Guibas和Robert Sedgewick于1978年写的一篇论文。红黑树的结构复杂，但它的操作有着良好的最坏情况运行时间，并且在实践中高效：它可以在log n时间内完成查找，插入和删除，这里的n是树中元素的数目.</p>
 <p>—— 摘自wiki对红黑树的介绍</p>
 </blockquote>
-<h3 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h3><p>红黑树是一颗查询复杂度保持在O(log N) 的自平衡二叉查找树。在原有的二叉查找树的性质下，通过给节点上色满足如下性质实现：</p>
+<h3 id="性质"><a class="markdownIt-Anchor" href="#性质"></a> 性质</h3>
+<p>红黑树是一颗查询复杂度保持在O(log N) 的自平衡二叉查找树。在原有的二叉查找树的性质下，通过给节点上色满足如下性质实现：</p>
 <ul>
 <li>节点是红色或黑色。</li>
 <li>根是黑色。</li>
@@ -235,42 +237,53 @@
 <li>每个红色节点必须有两个黑色的子节点。（从每个叶子到根的所有路径上不能有两个连续的红色节点。）</li>
 <li>从任一节点到其每个叶子的所有简单路径都包含相同数目的黑色节点。</li>
 </ul>
-<p><img src="https://blog-bucket-1300756499.cos.ap-chengdu.myqcloud.com/%E7%BA%A2%E9%BB%91%E6%A0%91.png" alt=""></p>
+<p><img src="https://blog-bucket-1300756499.cos.ap-chengdu.myqcloud.com/%E7%BA%A2%E9%BB%91%E6%A0%91.png" alt="" /></p>
 <p>任何红黑树都要满足上面五条性质。</p>
-<h3 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h3><p>红黑树的操作包括新增、删除、和查询操作。 查询操作与之前的二叉树查找树雷同，这里略过。</p>
-<h4 id="旋转"><a href="#旋转" class="headerlink" title="旋转"></a>旋转</h4><ul>
+<h3 id="操作"><a class="markdownIt-Anchor" href="#操作"></a> 操作</h3>
+<p>红黑树的操作包括新增、删除、和查询操作。 查询操作与之前的二叉树查找树雷同，这里略过。</p>
+<h4 id="旋转"><a class="markdownIt-Anchor" href="#旋转"></a> 旋转</h4>
+<ul>
 <li>左旋， 将树进行逆时针旋转。如图所示：</li>
 </ul>
-<p><img src="https://blog-bucket-1300756499.cos.ap-chengdu.myqcloud.com/rotationLeft.gif" alt=""></p>
+<p><img src="https://blog-bucket-1300756499.cos.ap-chengdu.myqcloud.com/rotationLeft.gif" alt="" /></p>
 <ul>
 <li>右旋，将树进行顺时针旋转。如图所示：</li>
 </ul>
-<p><img src="https://blog-bucket-1300756499.cos.ap-chengdu.myqcloud.com/rotationRight.gif" alt=""></p>
-<h4 id="新增"><a href="#新增" class="headerlink" title="新增"></a>新增</h4><p>红黑树新增时，默认新增的是红色节点。一种情况是，如果节点是根结点，则将树染红即可；一种简单的情况是，当节点的父亲是黑色节点时显然不会违反之前的规则。当父亲节点是红色节点时。需要分情况讨论。</p>
+<p><img src="https://blog-bucket-1300756499.cos.ap-chengdu.myqcloud.com/rotationRight.gif" alt="" /></p>
+<h4 id="新增"><a class="markdownIt-Anchor" href="#新增"></a> 新增</h4>
+<p>红黑树新增时，默认新增的是红色节点。一种情况是，如果节点是根结点，则将树染红即可；一种简单的情况是，当节点的父亲是黑色节点时显然不会违反之前的规则。当父亲节点是红色节点时。需要分情况讨论。</p>
 <ol>
-<li><p>当节点的叔叔节点（父亲节点的兄弟节点）是红色时。 将父亲节点和叔叔节点染黑，将爷爷节点染红。这样操作后，所有经过父亲节点和叔叔节点黑色节点数不变，满足<strong>性质5</strong>，但爷爷节点染红后可能会导致它其与上层节点的冲突。因此当前指针指向爷爷节点，重新进行一次判断。<br><img src="https://blog-bucket-1300756499.cos.ap-chengdu.myqcloud.com/%E7%BA%A2%E9%BB%91%E6%A0%91%E6%8F%92%E5%85%A51.png" alt=""></p>
+<li>
+<p>当节点的叔叔节点（父亲节点的兄弟节点）是红色时。 将父亲节点和叔叔节点染黑，将爷爷节点染红。这样操作后，所有经过父亲节点和叔叔节点黑色节点数不变，满足<strong>性质5</strong>，但爷爷节点染红后可能会导致它其与上层节点的冲突。因此当前指针指向爷爷节点，重新进行一次判断。<br />
+<img src="https://blog-bucket-1300756499.cos.ap-chengdu.myqcloud.com/%E7%BA%A2%E9%BB%91%E6%A0%91%E6%8F%92%E5%85%A51.png" alt="" /></p>
 </li>
-<li><p>当前节点的叔叔节点为黑色时，分如下两种情况来讨论（这里以父亲节点为左子树来判断，若是右子树则镜像操作即可）</p>
+<li>
+<p>当前节点的叔叔节点为黑色时，分如下两种情况来讨论（这里以父亲节点为左子树来判断，若是右子树则镜像操作即可）</p>
 <ol>
-<li><p>当前节点是父亲节点的左子树。 则将父亲节点染黑，爷爷节点染红。 再对爷爷进行右旋操作。 此时经过父亲节点的节点和黑节点数不变（满足<strong>性质5</strong>）。<br><img src="https://blog-bucket-1300756499.cos.ap-chengdu.myqcloud.com/%E7%BA%A2%E9%BB%91%E6%A0%91%E6%8F%92%E5%85%A5%202.1.png" alt=""></p>
+<li>
+<p>当前节点是父亲节点的左子树。 则将父亲节点染黑，爷爷节点染红。 再对爷爷进行右旋操作。 此时经过父亲节点的节点和黑节点数不变（满足<strong>性质5</strong>）。<br />
+<img src="https://blog-bucket-1300756499.cos.ap-chengdu.myqcloud.com/%E7%BA%A2%E9%BB%91%E6%A0%91%E6%8F%92%E5%85%A5%202.1.png" alt="" /></p>
 </li>
-<li><p>当前节点是父亲节点的右子树。则将父亲节点进行左旋，当前指针指向原来的父节点。此时当前节点变为父亲节点的左子树。 按照 2.1 的方式处理。<br><img src="https://blog-bucket-1300756499.cos.ap-chengdu.myqcloud.com/%E7%BA%A2%E9%BB%91%E6%A0%91%E6%8F%92%E5%85%A5%202.2.png" alt=""></p>
+<li>
+<p>当前节点是父亲节点的右子树。则将父亲节点进行左旋，当前指针指向原来的父节点。此时当前节点变为父亲节点的左子树。 按照 2.1 的方式处理。<br />
+<img src="https://blog-bucket-1300756499.cos.ap-chengdu.myqcloud.com/%E7%BA%A2%E9%BB%91%E6%A0%91%E6%8F%92%E5%85%A5%202.2.png" alt="" /></p>
 </li>
 </ol>
 </li>
 </ol>
-<h4 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h4><p>删除操作比较复杂。 大概跟味两部分：删除流程和删除节点后平衡操作。</p>
-<h5 id="删除流程"><a href="#删除流程" class="headerlink" title="删除流程"></a>删除流程</h5><p>首先通过二分操作找到需要删除的节点。根据当前节点判断是否能删除：</p>
+<h4 id="删除"><a class="markdownIt-Anchor" href="#删除"></a> 删除</h4>
+<p>删除操作比较复杂。 大概跟味两部分：删除流程和删除节点后平衡操作。</p>
+<h5 id="删除流程"><a class="markdownIt-Anchor" href="#删除流程"></a> 删除流程</h5>
+<p>首先通过二分操作找到需要删除的节点。根据当前节点判断是否能删除：</p>
 <ol>
 <li>如果被删除节点有两个孩子：直接寻找该节点的中序后继（即右子树中最小的节点）。后继节点的值覆盖当前节点值。指针指向后继重新进行判断。</li>
-<li>如果被删除节点有一个孩子或孩子都为 NIL：则继续进行判断<ol>
+<li>如果被删除节点有一个孩子或孩子都为 NIL：则继续进行判断</li>
 <li>如果被删除节点是红色节点：直接将孩子节点顶替当前节点。不会影响到性质。</li>
 <li>如果被删除节点是黑色节点，且其孩子节点为红色：将孩子节点顶替当前节点，再讲孩子节点染黑即可。</li>
 <li>如果被删除节点是黑色节点，且孩子节点都为黑色（此时孩子节点必为NIL节点，否则单独节点为黑色不满足性质5）：当时情况较为复杂，则进行以下删除后平衡操作。</li>
 </ol>
-</li>
-</ol>
-<h5 id="删除后平衡操作"><a href="#删除后平衡操作" class="headerlink" title="删除后平衡操作"></a>删除后平衡操作</h5><p>首先是如果当前节点已经是根结点了，则将根结点染黑。</p>
+<h5 id="删除后平衡操作"><a class="markdownIt-Anchor" href="#删除后平衡操作"></a> 删除后平衡操作</h5>
+<p>首先是如果当前节点已经是根结点了，则将根结点染黑。</p>
 <p>我们将删除前的节点定义为N（先平衡，再删除替换节点），节点的父节点为P， 兄弟节点为S，兄弟节点的左子树为SL，右子树为SR。我们遍历N、P、S、SL、SR可能有的情况有如下几种，我们将主意进行讨论。（下文将由N节点为P节点的左子树进行讨论。若为右子树，镜像操作即可）</p>
 <table>
 <thead>
@@ -283,7 +296,8 @@
 <th>case</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>B</td>
 <td>S</td>
 <td>B</td>
@@ -323,39 +337,57 @@
 <td>S</td>
 <td>(5)</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <ol>
-<li><p>删除节点为黑色， 父亲节点为红色， S节点为黑色， 且S节点的孩子SL、SR都为黑色（NIL节点）。 则将P节点染黑，S节点染红。则经过S节点的黑色节点数不变。经过N的黑色节点数补齐。满足相关性质。<br><img src="https://blog-bucket-1300756499.cos.ap-chengdu.myqcloud.com/%E7%BA%A2%E9%BB%91%E6%A0%91%E5%88%A0%E9%99%A4%201.png" alt=""></p>
+<li>
+<p>删除节点为黑色， 父亲节点为红色， S节点为黑色， 且S节点的孩子SL、SR都为黑色（NIL节点）。 则将P节点染黑，S节点染红。则经过S节点的黑色节点数不变。经过N的黑色节点数补齐。满足相关性质。<br />
+<img src="https://blog-bucket-1300756499.cos.ap-chengdu.myqcloud.com/%E7%BA%A2%E9%BB%91%E6%A0%91%E5%88%A0%E9%99%A4%201.png" alt="" /></p>
 </li>
-<li><p>删除节点为黑色， 父亲节点为黑色， S节点为黑色， 且S节点的孩子SL、SR都为黑色（NIL节点）。将S节点染红。此时通过N节点和通过S节节点，即通过P的比删除前少1。将当前指针指向P节点，重新执行平衡操作。<br><img src="https://blog-bucket-1300756499.cos.ap-chengdu.myqcloud.com/%E7%BA%A2%E9%BB%91%E6%A0%91%E5%88%A0%E9%99%A4%202.png" alt=""></p>
+<li>
+<p>删除节点为黑色， 父亲节点为黑色， S节点为黑色， 且S节点的孩子SL、SR都为黑色（NIL节点）。将S节点染红。此时通过N节点和通过S节节点，即通过P的比删除前少1。将当前指针指向P节点，重新执行平衡操作。<br />
+<img src="https://blog-bucket-1300756499.cos.ap-chengdu.myqcloud.com/%E7%BA%A2%E9%BB%91%E6%A0%91%E5%88%A0%E9%99%A4%202.png" alt="" /></p>
 </li>
-<li><p>删除节点为黑色，父亲节点为黑色，S节点为红色，则S节点的孩子SL、SR都为黑色。将P节点染红，S节点染黑，再对叶子节点进行左旋。此时经过S节点的数量不变。经过N的节点仍然少1，此时P为红色。按照情况4、5进行判断。<br><img src="https://blog-bucket-1300756499.cos.ap-chengdu.myqcloud.com/%E7%BA%A2%E9%BB%91%E6%A0%91%E5%88%A0%E9%99%A4%203.png" alt=""></p>
+<li>
+<p>删除节点为黑色，父亲节点为黑色，S节点为红色，则S节点的孩子SL、SR都为黑色。将P节点染红，S节点染黑，再对叶子节点进行左旋。此时经过S节点的数量不变。经过N的节点仍然少1，此时P为红色。按照情况4、5进行判断。<br />
+<img src="https://blog-bucket-1300756499.cos.ap-chengdu.myqcloud.com/%E7%BA%A2%E9%BB%91%E6%A0%91%E5%88%A0%E9%99%A4%203.png" alt="" /></p>
 </li>
-<li><p>删除节点为黑色，父亲节点为红色或者为黑色，S节点为黑色，其左SL节点为红色，右节点为黑色（为NIL）。将SL染黑，S染红，S节点右旋。这样S和SL角色互换，可以按照情况5判断。<br><img src="https://blog-bucket-1300756499.cos.ap-chengdu.myqcloud.com/%E7%BA%A2%E9%BB%91%E6%A0%91%E5%88%A0%E9%99%A44.png" alt=""></p>
+<li>
+<p>删除节点为黑色，父亲节点为红色或者为黑色，S节点为黑色，其左SL节点为红色，右节点为黑色（为NIL）。将SL染黑，S染红，S节点右旋。这样S和SL角色互换，可以按照情况5判断。<br />
+<img src="https://blog-bucket-1300756499.cos.ap-chengdu.myqcloud.com/%E7%BA%A2%E9%BB%91%E6%A0%91%E5%88%A0%E9%99%A44.png" alt="" /></p>
 </li>
-<li><p>删除节点为黑色，父亲节点为红色或者黑色，S节点为黑色。其右子树SR为红色（SL为红色或黑（NIL））。S节点染为P节点的颜色，P节点染黑，SR节点染黑，P节点左旋。 此时SR节点不变， SL节点和N节点恢复。满足规律5。恢复平衡。<br><img src="https://blog-bucket-1300756499.cos.ap-chengdu.myqcloud.com/%E7%BA%A2%E9%BB%91%E6%A0%91%E5%88%A0%E9%99%A45.png" alt=""></p>
+<li>
+<p>删除节点为黑色，父亲节点为红色或者黑色，S节点为黑色。其右子树SR为红色（SL为红色或黑（NIL））。S节点染为P节点的颜色，P节点染黑，SR节点染黑，P节点左旋。 此时SR节点不变， SL节点和N节点恢复。满足规律5。恢复平衡。<br />
+<img src="https://blog-bucket-1300756499.cos.ap-chengdu.myqcloud.com/%E7%BA%A2%E9%BB%91%E6%A0%91%E5%88%A0%E9%99%A45.png" alt="" /></p>
 </li>
 </ol>
-<h3 id="证明"><a href="#证明" class="headerlink" title="证明"></a>证明</h3><p>我们在之前说过红黑树的查询效率是log2(n)。但具体为什么根据前面5条性质即确定红黑树的具体查询效率的呢？需要进行计算：</p>
+<h3 id="证明"><a class="markdownIt-Anchor" href="#证明"></a> 证明</h3>
+<p>我们在之前说过红黑树的查询效率是log2(n)。但具体为什么根据前面5条性质即确定红黑树的具体查询效率的呢？需要进行计算：</p>
 <p>首先定义 BH(v) 为节点黑色高度（ 红黑树的节点v上到他的叶子节点的黑色节点的个数，不计v本身）、TOTAL[ BH(v) ] 为 当黑高为 BH(v 时，树可能有的总叶子节点个数 可知</p>
 <ol>
-<li><p>BH(v) = 0 时 v 此时可能为空节点或只有v本身 、TOTAL[ BH(v) ] 最小为 0</p>
+<li>
+<p>BH(v) = 0 时 v 此时可能为空节点或只有v本身 、TOTAL[ BH(v) ] 最小为 0</p>
 </li>
-<li><p>当 BH(v) &gt; 0 时： 根据 <strong>性质5</strong> 黑高为 BH(V) 的 红黑树， 其子树的黑高至少为 BH(V) - 1 （或子树的高度仍为 BH(V) ）即数的节点总数</p>
+<li>
+<p>当 BH(v) &gt; 0 时： 根据 <strong>性质5</strong> 黑高为 BH(V) 的 红黑树， 其子树的黑高至少为 BH(V) - 1 （或子树的高度仍为 BH(V) ）即数的节点总数</p>
 </li>
 </ol>
-<p>‘’’math<br>TOTAL[BH(v)] \geq 2 \cdot TOTAL[BH(v) - 1] + 1<br>‘’’</p>
+<p>‘’‘math<br />
+TOTAL[BH(v)] \geq 2 \cdot TOTAL[BH(v) - 1] + 1<br />
+‘’’</p>
 <p>由此可得</p>
-<p>‘’’math<br>TOTAL[BH(v)] = 2^{BH(v)} - 1<br>‘’’</p>
+<p>‘’‘math<br />
+TOTAL[BH(v)] = 2^{BH(v)} - 1<br />
+‘’’</p>
 <p>因此BH(V) 跟 TOTAL[V] 之间满足指数关系。又由<strong>性质4</strong>可知，树的黑高至少为这棵树的二分之一。 即 BH(V) &gt;= H(V) / 2，可得，对于根结点root而言。有</p>
-<h3 id="与-avl-的比较"><a href="#与-avl-的比较" class="headerlink" title="与 avl 的比较"></a>与 avl 的比较</h3><p>两者都是经过优化的自平衡二叉树。有各自的自平衡算法，增删查效率都是log(n)但有一些区别。但从平衡性而言，AVL的平衡性更加严格，如下图所示情况。 红黑树允许较低的平衡性（但复杂度仍为log(n)）换取更少的自平衡操作。由于avl数平衡性高于红黑树，查询效率上会高于红黑树（但复杂度仍为log(n)）。红黑树算是比较「折衷」的平衡树方案，C++的STL中和JAVA的TreeMap&amp;HashMap都实现了红黑树以达到O(log(n)) 的插入删除的效果</p>
+<h3 id="与-avl-的比较"><a class="markdownIt-Anchor" href="#与-avl-的比较"></a> 与 avl 的比较</h3>
+<p>两者都是经过优化的自平衡二叉树。有各自的自平衡算法，增删查效率都是log(n)但有一些区别。但从平衡性而言，AVL的平衡性更加严格，如下图所示情况。 红黑树允许较低的平衡性（但复杂度仍为log(n)）换取更少的自平衡操作。由于avl数平衡性高于红黑树，查询效率上会高于红黑树（但复杂度仍为log(n)）。红黑树算是比较「折衷」的平衡树方案，C++的STL中和JAVA的TreeMap&amp;HashMap都实现了红黑树以达到O(log(n)) 的插入删除的效果</p>
 <style>
 img {
 margin:auto;
 width:61.8%;
 }
 </style>
-
 
     </div>
 
@@ -415,7 +447,7 @@ width:61.8%;
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#红黑树"><span class="nav-number">1.</span> <span class="nav-text">红黑树</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#性质"><span class="nav-number">1.1.</span> <span class="nav-text">性质</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#操作"><span class="nav-number">1.2.</span> <span class="nav-text">操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#旋转"><span class="nav-number">1.2.1.</span> <span class="nav-text">旋转</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#新增"><span class="nav-number">1.2.2.</span> <span class="nav-text">新增</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#删除"><span class="nav-number">1.2.3.</span> <span class="nav-text">删除</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#删除流程"><span class="nav-number">1.2.3.1.</span> <span class="nav-text">删除流程</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#删除后平衡操作"><span class="nav-number">1.2.3.2.</span> <span class="nav-text">删除后平衡操作</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#证明"><span class="nav-number">1.3.</span> <span class="nav-text">证明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#与-avl-的比较"><span class="nav-number">1.4.</span> <span class="nav-text">与 avl 的比较</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#红黑树"><span class="nav-number">1.</span> <span class="nav-text"> 红黑树</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#性质"><span class="nav-number">1.1.</span> <span class="nav-text"> 性质</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#操作"><span class="nav-number">1.2.</span> <span class="nav-text"> 操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#旋转"><span class="nav-number">1.2.1.</span> <span class="nav-text"> 旋转</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#新增"><span class="nav-number">1.2.2.</span> <span class="nav-text"> 新增</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#删除"><span class="nav-number">1.2.3.</span> <span class="nav-text"> 删除</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#删除流程"><span class="nav-number">1.2.3.1.</span> <span class="nav-text"> 删除流程</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#删除后平衡操作"><span class="nav-number">1.2.3.2.</span> <span class="nav-text"> 删除后平衡操作</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#证明"><span class="nav-number">1.3.</span> <span class="nav-text"> 证明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#与-avl-的比较"><span class="nav-number">1.4.</span> <span class="nav-text"> 与 avl 的比较</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -516,6 +548,8 @@ width:61.8%;
 
 
 
+
+  
 
   
 
