@@ -196,7 +196,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2019-11-24 03:03:05 / Modified: 03:26:37" itemprop="dateCreated datePublished" datetime="2019-11-24T03:03:05+08:00">2019-11-24</time>
+              <time title="Created: 2019-11-24 03:03:05 / Modified: 13:30:27" itemprop="dateCreated datePublished" datetime="2019-11-24T03:03:05+08:00">2019-11-24</time>
             </span>
 
           
@@ -219,25 +219,27 @@
 <h3 id="性质"><a class="markdownIt-Anchor" href="#性质"></a> 性质</h3>
 <p>红黑树是一颗查询复杂度保持在O(log N) 的自平衡二叉查找树。在原有的二叉查找树的性质下，通过给节点上色满足如下性质实现：</p>
 <ul>
-<li>节点是红色或黑色。</li>
-<li>根是黑色。</li>
-<li>所有叶子都是黑色（叶子节点指NIL节点）。</li>
-<li>每个红色节点必须有两个黑色的子节点。（从每个叶子到根的所有路径上不能有两个连续的红色节点。）</li>
-<li>从任一节点到其每个叶子的所有简单路径都包含相同数目的黑色节点。</li>
+<li><strong>节点是红色或黑色。</strong></li>
+<li><strong>根是黑色。</strong></li>
+<li><strong>所有叶子都是黑色（叶子节点指NIL节点）。</strong></li>
+<li><strong>每个红色节点必须有两个黑色的子节点。（从每个叶子到根的所有路径上不能有两个连续的红色节点。）</strong></li>
+<li><strong>从任一节点到其每个叶子的所有简单路径都包含相同数目的黑色节点。</strong></li>
 </ul>
+<p>具体的某个红黑树入大概入下图所示。 注意<strong>任何红黑树都要满足上面五条性质。</strong></p>
 <p><img src="https://blog-bucket-1300756499.cos.ap-chengdu.myqcloud.com/%E7%BA%A2%E9%BB%91%E6%A0%91.png" alt="" /></p>
-<p>任何红黑树都要满足上面五条性质。</p>
 <h3 id="操作"><a class="markdownIt-Anchor" href="#操作"></a> 操作</h3>
-<p>红黑树的操作包括新增、删除、和查询操作。 查询操作与之前的二叉树查找树雷同，这里略过。</p>
+<p>红黑树的操作包括新增、删除、和查询操作。 查询操作与之前的二叉树查找树雷同，这里略过。额外地，需要说明一下二叉查找树中的旋转操作</p>
 <h4 id="旋转"><a class="markdownIt-Anchor" href="#旋转"></a> 旋转</h4>
+<p>二叉排序树的旋转指的是不破坏二叉树性质的情况下，改变树的结构的一种操作。具体分为如下两种操作：</p>
 <ul>
-<li>左旋， 将树进行逆时针旋转。如图所示：</li>
+<li>左旋， 将树进行逆时针旋转。如图所示，节点E进行左旋，原本E的右子树接替E的位置称为父亲，E成为S节点的左孩子。注意如果S原本有左子树（左子树的值应该在E到S之间），将该树称为E的新右儿子。仍然满足二叉排序树的规则：</li>
 </ul>
 <p><img src="https://blog-bucket-1300756499.cos.ap-chengdu.myqcloud.com/rotationLeft.gif" alt="" /></p>
 <ul>
-<li>右旋，将树进行顺时针旋转。如图所示：</li>
+<li>右旋，将树进行顺时针旋转。左旋的镜像操作。如图所示：</li>
 </ul>
 <p><img src="https://blog-bucket-1300756499.cos.ap-chengdu.myqcloud.com/rotationRight.gif" alt="" /></p>
+<p>注意，旋转是满足二叉排序树的结构变化操作。 旋转后的节点高度可能会发生变化。 红黑树而言，可能会导致与其性质冲突。 因此需要再对红黑树进行重染色。</p>
 <h4 id="新增"><a class="markdownIt-Anchor" href="#新增"></a> 新增</h4>
 <p>红黑树新增时，默认新增的是红色节点。一种情况是，如果节点是根结点，则将树染红即可；一种简单的情况是，当节点的父亲是黑色节点时显然不会违反之前的规则。当父亲节点是红色节点时。需要分情况讨论。</p>
 <ol>
@@ -350,7 +352,7 @@
 </li>
 </ol>
 <h3 id="证明"><a class="markdownIt-Anchor" href="#证明"></a> 证明</h3>
-<p>我们在之前说过红黑树的查询效率是log2(n)。但具体为什么根据前面5条性质即确定红黑树的具体查询效率的呢？需要进行计算：</p>
+<p>我们在之前说过红黑树的查询效率是log2(n)。但具体为什么根据前面5条性质即确定红黑树的具体查询效率的呢？需要进行证明：</p>
 <p>首先定义 BH(v) 为节点黑色高度（ 红黑树的节点v上到他的叶子节点的黑色节点的个数，不计v本身）、TOTAL[ BH(v) ] 为 当黑高为 BH(v 时，树可能有的总叶子节点个数 可知</p>
 <ol>
 <li>
