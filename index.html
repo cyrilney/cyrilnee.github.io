@@ -207,6 +207,250 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-cn">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/22/Leetcode-No-864-shortest-path-to-get-all-keys/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://blog-bucket-1300756499.cos.ap-chengdu.myqcloud.com/avatar.jpg">
+      <meta itemprop="name" content="Cyril Nee">
+      <meta itemprop="description" content="站在巨人的肩膀上。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="子我">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/04/22/Leetcode-No-864-shortest-path-to-get-all-keys/" class="post-title-link" itemprop="url">Leetcode No.864 shortest path to get all keys.</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-04-22 17:23:49 / Modified: 17:41:55" itemprop="dateCreated datePublished" datetime="2020-04-22T17:23:49+08:00">2020-04-22</time>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/2020/04/22/Leetcode-No-864-shortest-path-to-get-all-keys/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/04/22/Leetcode-No-864-shortest-path-to-get-all-keys/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="描述"><a class="markdownIt-Anchor" href="#描述"></a> 描述</h3>
+<p>给定一个二维网格 grid。 “.” 代表一个空房间， “#” 代表一堵墙， “@” 是起点，（“a”, “b”, …）代表钥匙，（“A”, “B”, …）代表锁。</p>
+<p>我们从起点开始出发，一次移动是指向四个基本方向之一行走一个单位空间。我们不能在网格外面行走，也无法穿过一堵墙。如果途经一个钥匙，我们就把它捡起来。除非我们手里有对应的钥匙，否则无法通过锁。</p>
+<p>假设 K 为钥匙/锁的个数，且满足 1 &lt;= K &lt;= 6，字母表中的前 K 个字母在网格中都有自己对应的一个小写和一个大写字母。换言之，每个锁有唯一对应的钥匙，每个钥匙也有唯一对应的锁。另外，代表钥匙和锁的字母互为大小写并按字母顺序排列。</p>
+<p>返回获取所有钥匙所需要的移动的最少次数。如果无法获取所有钥匙，返回 -1 。</p>
+<p>其中：</p>
+<ol>
+<li>1 &lt;= grid.length &lt;= 30</li>
+<li>1 &lt;= grid[0].length &lt;= 30</li>
+<li>grid[i][j] 只含有 ‘.’, ‘#’, ‘@’, ‘a’-‘f’ 以及 ‘A’-‘F’<br />
+钥匙的数目范围是 [1, 6]，每个钥匙都对应一个不同的字母，正好打开一个对应的锁。</li>
+</ol>
+<h3 id="思路"><a class="markdownIt-Anchor" href="#思路"></a> 思路</h3>
+<p>一开始看到题目可以想到也许可以使用搜索解决。又因数字方位进一步验证了我的猜想。如思路如下：</p>
+<ol>
+<li>先确定K，使用深搜递归出一个钥匙获取顺序。如 “acbdef”</li>
+<li>根据获取顺序。从起点开始进行多次广搜 a =&gt; c  =&gt; b =&gt; d  =&gt; e  =&gt; f计算出一共的最短距离。</li>
+<li>广搜过程中遇墙则结束，遇到锁则判断钥匙是否已经在之前拿过了即为通过。</li>
+<li>最短距离取最小值。</li>
+</ol>
+<h3 id="复杂度-okknm"><a class="markdownIt-Anchor" href="#复杂度-okknm"></a> 复杂度: O(K!K*nm)</h3>
+<p>由于K&lt;=6，k!最大值为720。单次广搜最坏情况为NM(30*30)，该解法最坏情况3,888,000</p>
+<h3 id="answers-code"><a class="markdownIt-Anchor" href="#answers-code"></a> Answers Code</h3>
+<pre><code>class Solution {
+
+    // 广搜节点  定义横坐标 纵坐标 和 步数
+    static class Loc {
+        public int x;
+        public int y;
+        public int step;
+
+        @Override
+        public boolean equals(Object obj) {
+            if (!(obj instanceof Loc))
+                return super.equals(obj);
+            Loc loc = (Loc) obj;
+            return this.x == loc.x &amp;&amp; this.y == loc.y;
+        }
+
+        @Override
+        public int hashCode() {
+            return this.x * 40 + this.y;
+        }
+
+        public Loc(int x, int y, int step) {
+            this.x = x;
+            this.y = y;
+            this.step = step;
+        }
+
+        public Loc(int x, int y) {
+            this(x, y, 0);
+        }
+    }
+
+    final static Loc[] dir = new Loc[]{new Loc(0, 1), new Loc(1, 0), new Loc(0, -1), new Loc(-1, 0)};
+
+    public int shortestPathAllKeys(String[] grid) {
+        Character kChar = null;
+        for (int i = 0; i &lt; grid.length; i++) {
+            for (int j = 0; j &lt; grid[i].length(); j++) {
+                if (grid[i].charAt(j) &lt;= 'z' &amp;&amp; grid[i].charAt(j) &gt;= 'a') {
+                    if (kChar == null || kChar &lt; grid[i].charAt(j))
+                        kChar = grid[i].charAt(j);
+                }
+            }
+        }
+
+        return this.work(0, kChar - 'a' + 1, Collections.emptySet(), &quot;&quot;, grid);
+
+    }
+
+    public int work(int cur, int maxDeep, Set&lt;Character&gt; had, String aim, String[] grid) {
+
+        // 递归到最后一层。 开始for循环广搜处理
+        if (cur == maxDeep) {
+            char startChar = '@';
+            int total = 0;
+            Loc startLoc = new Loc(0, 0, 0);
+            had = new HashSet&lt;&gt;();
+            for (int k = 0; k &lt; maxDeep; k++) {
+                changeLocStart(startLoc, startChar, grid);
+                startLoc.step = total;
+                int temp = bfs(grid, startLoc, had, aim.charAt(k));
+                if (temp == -1) {
+                    return -1;
+                }
+                total = temp;
+                had.add(aim.charAt(k));
+                startChar = aim.charAt(k);
+            }
+            return total;
+
+        }
+        int max = Integer.MAX_VALUE;
+        for (char i = 'a'; i &lt; 'a' + maxDeep; i++) {
+            if (had.contains(i))
+                continue;
+            Set&lt;Character&gt; newHad = new HashSet&lt;&gt;(had);
+            newHad.add(i);
+            int r = work(cur + 1, maxDeep, newHad, aim + i, grid);
+            if (r != -1) {
+                max = Math.min(max, r);
+            }
+        }
+        return max == Integer.MAX_VALUE ? -1 : max;
+    }
+
+    private void changeLocStart(Loc startLoc, char target, String[] grid) {
+        for (int i = 0; i &lt; grid.length; i++) {
+            for (int j = 0; j &lt; grid[i].length(); j++) {
+                if (grid[i].charAt(j) == target) {
+                    startLoc.x = i;
+                    startLoc.y = j;
+                    return;
+                }
+            }
+        }
+    }
+
+    // 广搜，查询起点到终点
+    private int bfs(String[] grid, Loc start, Set&lt;Character&gt; had, Character target) {
+        Queue&lt;Loc&gt; q = new LinkedList&lt;&gt;();
+        Set&lt;Loc&gt; used = new HashSet&lt;&gt;();
+
+        q.offer(start);
+
+        while (!q.isEmpty()) {
+            Loc front = q.poll();
+            if (used.contains(front)) {
+                continue;
+            }
+            used.add(front);
+            if (grid[front.x].charAt(front.y) == target)
+                return front.step;
+
+            for (int i = 0; i &lt; dir.length; i++) {
+                Loc nxt = new Loc(front.x + dir[i].x, front.y + dir[i].y, front.step + 1);
+
+                if (nxt.x &lt; 0 || nxt.x &gt;= grid.length || nxt.y &lt; 0 || nxt.y &gt;= grid[0].length()) {
+                    continue;
+                }
+
+                if (grid[nxt.x].charAt(nxt.y) == '#')
+                    continue;
+                else if (grid[nxt.x].charAt(nxt.y) == '.' || grid[nxt.x].charAt(nxt.y)== '@'
+                        || (grid[nxt.x].charAt(nxt.y) &gt;= 'a' &amp;&amp; grid[nxt.x].charAt(nxt.y) &lt;= 'z')) {
+                    q.offer(nxt);
+                } else if (grid[nxt.x].charAt(nxt.y) &gt;= 'A' &amp;&amp; grid[nxt.x].charAt(nxt.y) &lt;= 'Z') {
+                    Character need = (char) (grid[nxt.x].charAt(nxt.y) - ('Z' - 'z'));
+                    if (!had.contains(need)) {
+                        continue;
+                    }
+                    q.offer(nxt);
+                }
+
+            }
+        }
+        return -1;
+
+    }
+
+    public static void main(String[] args) {
+        Solution solution = new Solution();
+        System.out.println(&quot;case 1&quot;);
+        System.out.println(solution.shortestPathAllKeys(new String[]{&quot;@.a.#&quot;,&quot;###.#&quot;,&quot;b.A.B&quot;}));
+        System.out.println(&quot;case 2&quot;);
+        System.out.println(solution.shortestPathAllKeys(new String[]{&quot;@..aA&quot;,&quot;..B#.&quot;,&quot;....b&quot;}));
+    }
+}
+//leetcode submit region end(Prohibit modification and deletion)
+</code></pre>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-cn">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/24/%E7%BA%A2%E9%BB%91%E6%A0%91/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -585,14 +829,14 @@ width:61.8%;
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">2</span>
+          <span class="site-state-item-count">3</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-count">2</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -631,7 +875,7 @@ width:61.8%;
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2019</span>
+  <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
