@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/tags/index-1.html</loc>
+    
+    <lastmod>2020-04-23T16:48:35.902Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2020/04/22/Leetcode-No-864-shortest-path-to-get-all-keys/</loc>
     
     <lastmod>2020-04-23T16:45:21.303Z</lastmod>
