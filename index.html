@@ -207,6 +207,145 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-cn">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/24/leetcode-%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E9%80%86%E5%BA%8F%E5%AF%B9/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://blog-bucket-1300756499.cos.ap-chengdu.myqcloud.com/avatar.jpg">
+      <meta itemprop="name" content="Cyril Nee">
+      <meta itemprop="description" content="站在巨人的肩膀上。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="子我">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/04/24/leetcode-%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E9%80%86%E5%BA%8F%E5%AF%B9/" class="post-title-link" itemprop="url">Leetcode 数组中的逆序对</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-04-24 22:29:52 / Modified: 22:51:06" itemprop="dateCreated datePublished" datetime="2020-04-24T22:29:52+08:00">2020-04-24</time>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/2020/04/24/leetcode-%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E9%80%86%E5%BA%8F%E5%AF%B9/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/04/24/leetcode-%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E9%80%86%E5%BA%8F%E5%AF%B9/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="描述"><a class="markdownIt-Anchor" href="#描述"></a> 描述</h3>
+<p>在数组中的两个数字，如果前面一个数字大于后面的数字，则这两个数字组成一个逆序对。输入一个数组，求出这个数组中的逆序对的总数。</p>
+<pre><code>示例 1:
+
+输入: [7,5,6,4]
+输出: 5
+</code></pre>
+<h3 id="思路"><a class="markdownIt-Anchor" href="#思路"></a> 思路</h3>
+<p>第一时间想到的是排序后计算偏移量的办法，如果数字不重复时是可行的。如果数值有重复，则位置偏移不能保证后面的值一定比前值要小。</p>
+<p>午睡的时候想到用树状数组统计前面的数字有多少个数字比它大就可以了，至于数字范围较大的问题，由于数字一共50000个，直接化为[1,50000]内的数字即可。对于静态查询的题目算是大财小用了，应该还有其他解，一时想不到。但这个解法已经是O(nlogn)了。</p>
+<h3 id="复杂度-onlogn"><a class="markdownIt-Anchor" href="#复杂度-onlogn"></a> 复杂度: O(nlog(n))</h3>
+<h3 id="answers-code"><a class="markdownIt-Anchor" href="#answers-code"></a> Answers Code</h3>
+<pre><code>class Node:
+    def __init__(self, val, index):
+        self.val = val
+        self.index = index
+
+class Solution:
+
+    def reversePairs(self, nums: List[int]) -&gt; int:
+        max_index = 65537
+        tree = [0] * max_index
+
+        def lowerBit(num):
+            return num &amp; (-num)
+
+        def query(index):
+            ans = 0
+            while index &gt; 0:
+                ans += tree[index]
+                index -= lowerBit(index)
+            return ans
+
+        def add(index, num):
+            if index &lt;= 0:
+                return 0
+            while index &lt; max_index:
+                tree[index] += num
+                index += lowerBit(index)
+
+        i = 0
+        nodes = []
+
+        # 前期处理
+        while i &lt; len(nums):
+            nodes.append(Node(nums[i], i))
+            i += 1
+        nodes.sort(key=lambda node:node.val)
+        i = 0
+        cnt = 1
+        while i &lt; len(nums):
+            if i &gt; 0 and nodes[i].val &gt; nodes[i-1].val:
+                cnt += 1
+            nums[nodes[i].index] = cnt
+            i += 1
+
+        # print(nums)
+
+        i = len(nums) - 1
+        ans = 0
+        while i &gt;= 0:
+            ans += query(nums[i] - 1)
+            # print(query(nums[i] - 1))
+            add(nums[i], 1)
+            i -= 1
+        return ans
+</code></pre>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-cn">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/23/leetcode-coin-lcci/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -238,7 +377,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-24 00:45:16" itemprop="dateModified" datetime="2020-04-24T00:45:16+08:00">2020-04-24</time>
+                <time title="Modified: 2020-04-24 22:51:05" itemprop="dateModified" datetime="2020-04-24T22:51:05+08:00">2020-04-24</time>
               </span>
 
           
@@ -346,7 +485,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-24 00:45:18" itemprop="dateModified" datetime="2020-04-24T00:45:18+08:00">2020-04-24</time>
+                <time title="Modified: 2020-04-24 22:51:04" itemprop="dateModified" datetime="2020-04-24T22:51:04+08:00">2020-04-24</time>
               </span>
 
           
@@ -466,7 +605,7 @@ class Solution:
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-24 00:45:21" itemprop="dateModified" datetime="2020-04-24T00:45:21+08:00">2020-04-24</time>
+                <time title="Modified: 2020-04-24 22:51:01" itemprop="dateModified" datetime="2020-04-24T22:51:01+08:00">2020-04-24</time>
               </span>
 
           
@@ -1063,7 +1202,7 @@ width:61.8%;
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-count">6</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

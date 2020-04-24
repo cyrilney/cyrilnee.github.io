@@ -2,30 +2,37 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://yoursite.com/tags/index-1.html</loc>
+    <loc>http://yoursite.com/2020/04/24/leetcode-%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E9%80%86%E5%BA%8F%E5%AF%B9/</loc>
     
-    <lastmod>2020-04-23T16:48:35.902Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2020/04/22/Leetcode-No-864-shortest-path-to-get-all-keys/</loc>
-    
-    <lastmod>2020-04-23T16:45:21.303Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2020/04/22/Leetcode-No-199-binary-tree-right-side-view/</loc>
-    
-    <lastmod>2020-04-23T16:45:18.361Z</lastmod>
+    <lastmod>2020-04-24T14:51:06.980Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://yoursite.com/2020/04/23/leetcode-coin-lcci/</loc>
     
-    <lastmod>2020-04-23T16:45:16.763Z</lastmod>
+    <lastmod>2020-04-24T14:51:05.879Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2020/04/22/Leetcode-No-199-binary-tree-right-side-view/</loc>
+    
+    <lastmod>2020-04-24T14:51:04.589Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2020/04/22/Leetcode-No-864-shortest-path-to-get-all-keys/</loc>
+    
+    <lastmod>2020-04-24T14:51:01.844Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/tags/index-1.html</loc>
+    
+    <lastmod>2020-04-23T16:48:35.902Z</lastmod>
     
   </url>
   
