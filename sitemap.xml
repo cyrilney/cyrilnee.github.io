@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2020/04/25/Leetcode-No-46-permutations/</loc>
+    
+    <lastmod>2020-04-25T15:20:44.334Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2020/04/25/Leetcode-shortest-supersequence/</loc>
+    
+    <lastmod>2020-04-25T15:20:35.233Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2020/04/24/leetcode-reverse-order-pair/</loc>
     
     <lastmod>2020-04-24T14:53:33.756Z</lastmod>

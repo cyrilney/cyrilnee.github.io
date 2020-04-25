@@ -207,6 +207,231 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-cn">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/25/Leetcode-shortest-supersequence/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://blog-bucket-1300756499.cos.ap-chengdu.myqcloud.com/avatar.jpg">
+      <meta itemprop="name" content="Cyril Nee">
+      <meta itemprop="description" content="站在巨人的肩膀上。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="子我">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/04/25/Leetcode-shortest-supersequence/" class="post-title-link" itemprop="url">Leetcode shortest-supersequence</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-04-25 22:51:56 / Modified: 23:20:35" itemprop="dateCreated datePublished" datetime="2020-04-25T22:51:56+08:00">2020-04-25</time>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/2020/04/25/Leetcode-shortest-supersequence/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/04/25/Leetcode-shortest-supersequence/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="描述"><a class="markdownIt-Anchor" href="#描述"></a> 描述</h3>
+<p>两个数组，一个长一个短，短的元素均不相同。找到长数组中包含短数组所有的元素的最短子数组，其出现顺序无关紧要。</p>
+<p>返回最短子数组的左端点和右端点，如有多个满足条件的子数组，返回左端点最小的一个。若不存在，返回空数组。</p>
+<pre><code>示例 1:
+
+输入:
+big = [7,5,9,0,2,1,3,5,7,9,1,1,5,8,8,9,7]
+small = [1,5,9]
+输出: [7,10]
+</code></pre>
+<h3 id="思路"><a class="markdownIt-Anchor" href="#思路"></a> 思路</h3>
+<p>目的是找到短数组在长数组中出现的最短位置。我这里通过一个dictionary记录big中出现的small元素及其位置。 由于记录长度的时候如果同个元素后者出现则以后者为准（前者或已经被统计）。使用队列记录每一个small元素的位置，当对尾的元素位置已经在后面出现过时（即队尾位置跟字典位置不相符时）表示队尾已经无用了，删除之。当字典元素与small元素数量相同时则表示是合法答案。 进行长度判断。</p>
+<h3 id="复杂度-on"><a class="markdownIt-Anchor" href="#复杂度-on"></a> 复杂度: O(n)</h3>
+<p>队列最大长度为n，且元素只会出现一次。</p>
+<h3 id="answers-code"><a class="markdownIt-Anchor" href="#answers-code"></a> Answers Code</h3>
+<pre><code>from collections import deque
+
+class Node:
+    def __init__(self, val, index):
+        self.val = val
+        self.index = index
+
+
+class Solution:
+    def shortestSeq(self, big: List[int], small: List[int]) -&gt; List[int]:
+        # 双端队列
+        q = deque()
+        max_index = -1
+        min_index = -1
+        small = set(small)
+        m = {}
+        i = 0
+        ans = []
+        while i &lt; len(big):
+            if big[i] in small:
+                m[big[i]] = i
+                q.append(Node(big[i], i))
+                while q[0].index != m[q[0].val]:
+                    q.popleft()
+
+            if len(m) == len(small):
+                if not ans or ans[1] - ans[0] &gt; q[-1].index - q[0].index:
+                    ans = [q[0].index, q[-1].index]
+
+            i += 1
+        return ans
+</code></pre>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-cn">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/25/Leetcode-No-46-permutations/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://blog-bucket-1300756499.cos.ap-chengdu.myqcloud.com/avatar.jpg">
+      <meta itemprop="name" content="Cyril Nee">
+      <meta itemprop="description" content="站在巨人的肩膀上。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="子我">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/04/25/Leetcode-No-46-permutations/" class="post-title-link" itemprop="url">Leetcode No.46 permutations</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-04-25 22:50:11 / Modified: 23:20:44" itemprop="dateCreated datePublished" datetime="2020-04-25T22:50:11+08:00">2020-04-25</time>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/2020/04/25/Leetcode-No-46-permutations/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/04/25/Leetcode-No-46-permutations/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="描述"><a class="markdownIt-Anchor" href="#描述"></a> 描述</h3>
+<p>4月25日每日一题。给定一个<strong>没有重复</strong>数字的序列，返回其所有可能的全排列。</p>
+<p>示例:<br />
+输入: [1,2,3]<br />
+输出:<br />
+[<br />
+[1,2,3],<br />
+[1,3,2],<br />
+[2,1,3],<br />
+[2,3,1],<br />
+[3,1,2],<br />
+[3,2,1]<br />
+]</p>
+<h3 id="思路"><a class="markdownIt-Anchor" href="#思路"></a> 思路</h3>
+<p>回溯算法例题。</p>
+<h3 id="复杂度-onn"><a class="markdownIt-Anchor" href="#复杂度-onn"></a> 复杂度: O(n^n)</h3>
+<h3 id="answers-code"><a class="markdownIt-Anchor" href="#answers-code"></a> Answers Code</h3>
+<pre><code>class Solution:
+    def permute(self, nums: List[int]) -&gt; List[List[int]]:
+        self.res = []
+        self.dfs(nums, [0]*len(nums), len(nums), [])
+        return self.res
+    def dfs(self, nums, used, total, ans):
+        if not total:
+            self.res.append(ans)
+            return
+        i = 0
+        while i &lt; len(nums):
+            if not used[i]:
+                used[i] = 1
+                self.dfs(nums, used, total - 1, ans + [nums[i]])
+                used[i] = 0
+            i += 1
+</code></pre>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-cn">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/24/leetcode-reverse-order-pair/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1202,7 +1427,7 @@ width:61.8%;
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-count">8</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
