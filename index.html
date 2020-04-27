@@ -207,6 +207,127 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-cn">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/27/Leetcode-No-33-search-in-rotated-sorted-array/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://blog-bucket-1300756499.cos.ap-chengdu.myqcloud.com/avatar.jpg">
+      <meta itemprop="name" content="Cyril Nee">
+      <meta itemprop="description" content="站在巨人的肩膀上。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="子我">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/04/27/Leetcode-No-33-search-in-rotated-sorted-array/" class="post-title-link" itemprop="url">Leetcode No.33 search-in-rotated-sorted-array</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-04-27 23:09:56 / Modified: 23:17:25" itemprop="dateCreated datePublished" datetime="2020-04-27T23:09:56+08:00">2020-04-27</time>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/2020/04/27/Leetcode-No-33-search-in-rotated-sorted-array/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/04/27/Leetcode-No-33-search-in-rotated-sorted-array/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="描述"><a class="markdownIt-Anchor" href="#描述"></a> 描述</h3>
+<p>4月27日每日一题。</p>
+<p>假设按照升序排序的数组在预先未知的某个点上进行了旋转。<br />
+( 例如，数组 [0,1,2,4,5,6,7] 可能变为 [4,5,6,7,0,1,2] )。<br />
+搜索一个给定的目标值，如果数组中存在这个目标值，则返回它的索引，否则返回 -1 。<br />
+你可以假设数组中不存在重复的元素。<br />
+你的算法时间复杂度必须是 O(log n) 级别。</p>
+<h3 id="思路"><a class="markdownIt-Anchor" href="#思路"></a> 思路</h3>
+<p>二分查找问题，其实本质上是一样的。 列表是进行过偏移的有序数组。可以先找到有序数组的偏移量。<br />
+（比如 [4,5,6,7,0,1,2]，偏移下标为4，即最小元素index为4）。二分时候实际的边界值为（left:(0+4)%7=4, right:(6+4)%7=3）<br />
+然后二分即可。</p>
+<h3 id="复杂度-ologn"><a class="markdownIt-Anchor" href="#复杂度-ologn"></a> 复杂度: O(log(n))</h3>
+<h3 id="answers-code"><a class="markdownIt-Anchor" href="#answers-code"></a> Answers Code</h3>
+<pre><code>class Solution:
+    def search(self, nums: List[int], target: int) -&gt; int:
+        if not nums:
+            return -1
+
+        startIndex = self.searchStart(nums, 0, len(nums) - 1)
+        return self.dfs(nums, 0, len(nums)-1, target, startIndex)
+
+    # 二分搜索
+    def dfs(self, nums, left, right, target, startIndex):
+        if left &gt; right:
+            return -1
+        trueLeft = (left + startIndex) % len(nums)
+        trueRight = (right + startIndex) % len(nums)
+        if left == right:
+            if nums[trueLeft] == target:
+                return trueLeft
+            return -1
+        mid = int((left + right)/2)
+        trueMid = (mid + startIndex) % len(nums)
+        if nums[trueMid] &gt;= target:
+            return self.dfs(nums, left, mid, target, startIndex)
+        else:
+            return self.dfs(nums, mid+1, right, target, startIndex)
+
+    # 开始下标查询
+    def searchStart(self, nums, left, right):
+        if left == right:
+            return left
+        if nums[left] &lt; nums[right]:
+            return left
+        mid = int((left + right) / 2)
+        if nums[mid] &lt; nums[left]:
+            return self.searchStart(nums, left, mid)
+        return self.searchStart(nums, mid+1, right)
+</code></pre>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-cn">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/27/Leetcode-No-23-merge-k-sorted-lists/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1604,7 +1725,7 @@ width:61.8%;
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-count">10</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
