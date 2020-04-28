@@ -207,6 +207,111 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-cn">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/28/Leetcode-number-of-occurrences-of-numbers-in-the-array/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://blog-bucket-1300756499.cos.ap-chengdu.myqcloud.com/avatar.jpg">
+      <meta itemprop="name" content="Cyril Nee">
+      <meta itemprop="description" content="站在巨人的肩膀上。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="子我">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/04/28/Leetcode-number-of-occurrences-of-numbers-in-the-array/" class="post-title-link" itemprop="url">Leetcode number-of-occurrences-of-numbers-in-the-array.</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-04-28 15:31:11 / Modified: 15:59:54" itemprop="dateCreated datePublished" datetime="2020-04-28T15:31:11+08:00">2020-04-28</time>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/2020/04/28/Leetcode-number-of-occurrences-of-numbers-in-the-array/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/04/28/Leetcode-number-of-occurrences-of-numbers-in-the-array/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="描述"><a class="markdownIt-Anchor" href="#描述"></a> 描述</h3>
+<p>4月28日每日一题。<br />
+一个整型数组 nums 里除两个数字之外，其他数字都出现了两次。请写程序找出这两个只出现一次的数字。要求时间复杂度是O(n)，空间复杂度是O(1)。</p>
+<pre><code>示例 1：
+
+输入：nums = [4,1,4,6]
+输出：[1,6] 或 [6,1]
+</code></pre>
+<h3 id="思路"><a class="markdownIt-Anchor" href="#思路"></a> 思路</h3>
+<p>面对这个问题的时候，我们可以先简单化这个问题来学习关键解法。<br />
+一个整型数组 nums 里除<strong>一</strong>个数字之外，其他数字都出现了两次。要如何找出这个数字呢？<br />
+我们可以将整个数组里面的元素进行一次按位异或（xor）的处理。原理是这样的：两个相同数字的异或结果为0，数组中重复的元素异或过程中会被自己消去。</p>
+<p>解决了简单版的问题后。我们进行如下思考：如果进行异或之后只能得到两个数字的异或结果，有什么意义呢？进一步思考按位异或的定义（逐个比较二进制位。若不同该位结果为1，相同返回0），即对于为1的某一个二进制位而言，这两个数字该位置在该位一定是不同的。其他重复的元素在该二进制位一定是相同的（要么为0要么为1而且必定成对出现）。 可以由此将数组分成两个单一数字出现一次，其他数字出现两次的子数组。分别进行异或即可。</p>
+<p>比如 [4,1,4,6] 二进制分别为[0b100, 0b1, 0b100, 0b110] 总体异或结果为5(Ob111)<br />
+任取一位置1，将数组分为<br />
+[1],和[4,4,6]<br />
+分别异或得到结果[1,6]</p>
+<h3 id="复杂度-on"><a class="markdownIt-Anchor" href="#复杂度-on"></a> 复杂度: O(n)</h3>
+<h3 id="answers-code"><a class="markdownIt-Anchor" href="#answers-code"></a> Answers Code</h3>
+<pre><code>class Solution:
+    def singleNumbers(self, nums: List[int]) -&gt; List[int]:
+        xorNum = 0
+        for num in nums:
+            xorNum ^= num
+        lowerbit = xorNum &amp; (-xorNum)
+        ans = [0,0]
+        for num in nums:
+            if num &amp; lowerbit:
+                ans[0] ^= num
+            else:
+                ans[1] ^= num
+        return ans
+</code></pre>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-cn">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/27/Leetcode-No-33-search-in-rotated-sorted-array/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1593,94 +1698,12 @@ width:61.8%;
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-cn">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/22/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://blog-bucket-1300756499.cos.ap-chengdu.myqcloud.com/avatar.jpg">
-      <meta itemprop="name" content="Cyril Nee">
-      <meta itemprop="description" content="站在巨人的肩膀上。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="子我">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/11/22/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-11-22 17:44:12" itemprop="dateCreated datePublished" datetime="2019-11-22T17:44:12+08:00">2019-11-22</time>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine: </span>
-    
-    <a title="valine" href="/2019/11/22/hello-world/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2019/11/22/hello-world/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="quick-start"><a class="markdownIt-Anchor" href="#quick-start"></a> Quick Start</h2>
-<h3 id="create-a-new-post"><a class="markdownIt-Anchor" href="#create-a-new-post"></a> Create a new post</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="run-server"><a class="markdownIt-Anchor" href="#run-server"></a> Run server</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="generate-static-files"><a class="markdownIt-Anchor" href="#generate-static-files"></a> Generate static files</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="deploy-to-remote-sites"><a class="markdownIt-Anchor" href="#deploy-to-remote-sites"></a> Deploy to remote sites</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+  </nav>
 
 
 
@@ -1725,7 +1748,7 @@ width:61.8%;
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-count">11</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
